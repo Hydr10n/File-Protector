@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="README.md" />
     <None Include="HookLib.def">
       <Filter>Source Files</Filter>
     </None>

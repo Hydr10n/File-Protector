@@ -154,7 +154,6 @@
   <ItemGroup>
     <None Include="HookLib.def" />
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HookLib.h" />

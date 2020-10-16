@@ -24,7 +24,7 @@ BOOL WINAPI UnhookGlobalWindowsHook() {
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpvReserved) {
-	using namespace Hydr10n::FileUtils;
+	using Hydr10n::FileUtils::FileProtector;
 	switch (dwReason) {
 	case DLL_PROCESS_ATTACH: {
 		FileProtector::Hide(sharedData.szHookCallerFileName);
