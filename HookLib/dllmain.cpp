@@ -10,9 +10,7 @@ struct { WCHAR szHookCallerFileName[UNICODE_STRING_MAX_CHARS]; } sharedData{};
 HINSTANCE hInstance;
 
 BOOL WINAPI SetGlobalWindowsHook() {
-	std::wstring moduleFileName;
-	if (Hydr10n::FileUtils::GetModuleFileNameW(moduleFileName))
-		(void)lstrcpynW(sharedData.szHookCallerFileName, moduleFileName.c_str(), ARRAYSIZE(sharedData.szHookCallerFileName));
+	GetModuleFileNameW(NULL, sharedData.szHookCallerFileName, ARRAYSIZE(sharedData.szHookCallerFileName));
 	return hHook == NULL ? (hHook = SetWindowsHookExW(WH_GETMESSAGE, [](int nCode, WPARAM wParam, LPARAM lParam) { return CallNextHookEx(NULL, nCode, wParam, lParam); }, hInstance, 0)) != NULL : FALSE;
 }
 
