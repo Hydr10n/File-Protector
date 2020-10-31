@@ -1,6 +1,6 @@
 /*
  * Heade File: FileProtector.h
- * Last Update: 2020/10/23
+ * Last Update: 2020/10/31
  *
  * Copyright (C) Hydr10n@GitHub. All Rights Reserved.
  */
@@ -47,7 +47,7 @@ namespace Hydr10n {
 				if (NT_SUCCESS(ret) && FileInformationClass == FILE_INFORMATION_CLASS::FileIdBothDirectoryInformation)
 					for (PFILE_ID_BOTH_DIR_INFO pCurrent = (PFILE_ID_BOTH_DIR_INFO)FileInformation, pPrevious = NULL; pCurrent != NULL; pCurrent = (PFILE_ID_BOTH_DIR_INFO)((PBYTE)pCurrent + pCurrent->NextEntryOffset)) {
 						wstring path;
-						if (GetFinalPathNameByHandleW(path, FileHandle) && !std_container_helpers::set_helper::contains(m_HiddenPaths, SkipUnicodeLongPathPrefix(path.c_str()) + ((path.back() == L'\\' ? L'\0' : L'\\') + wstring(pCurrent->FileName, pCurrent->FileNameLength / sizeof(*pCurrent->FileName)))))
+						if (GetFinalPathNameByHandleW(path, FileHandle) && !std_container_helpers::set_helper::contains(m_HiddenPaths, SkipUnicodeLongPathPrefix(path.c_str()) + ((path.back() == L'\\' ? L"" : L"\\") + wstring(pCurrent->FileName, pCurrent->FileNameLength / sizeof(*pCurrent->FileName)))))
 							pPrevious = pCurrent;
 						else if (pPrevious != NULL)
 							pPrevious->NextEntryOffset = pCurrent->NextEntryOffset ? pPrevious->NextEntryOffset + pCurrent->NextEntryOffset : 0;
